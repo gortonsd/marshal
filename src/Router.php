@@ -35,7 +35,7 @@ namespace gortonsd\Marshal;
 class Router {
     private $routes = [];
     private $controllerFolder;
-    private $cacheFile = __DIR__ . '/routes.cache';
+    private $cacheFile = __DIR__ . '/routes.cache.json';
 
     /**
      * @param string $controllerFolder Path to controllers directory (required)
@@ -57,7 +57,8 @@ class Router {
     public function loadControllers($minCacheAge = 3600) {
         $cacheValid = false;
         if (file_exists($this->cacheFile)) {
-            $this->routes = unserialize(file_get_contents($this->cacheFile));
+            $json = file_get_contents($this->cacheFile);
+            $this->routes = json_decode($json, true) ?? [];
             $cacheValid = true;
         }
         if (!$cacheValid || $this->controllersChanged($minCacheAge)) {
@@ -91,7 +92,7 @@ class Router {
                     //echo("class not found");
                 }
             }
-            file_put_contents($this->cacheFile, serialize($this->routes));
+            file_put_contents($this->cacheFile, json_encode($this->routes, JSON_PRETTY_PRINT));
         }
     }
 
