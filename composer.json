@@ -29,12 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "gortonsd\\Router\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "gortonsd\\Router\\Tests\\": "tests/"
+            "gortonsd\\Marshal\\": "src/"
         }
     },
     "minimum-stability": "stable",
