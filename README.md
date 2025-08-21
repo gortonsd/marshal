@@ -1,5 +1,5 @@
 
-# gortonsd/Marshal
+# gortonsd/marshal
 
 Marshal is a lightweight PHP framework designed to make building web applications simple and intuitive. With Marshal, you can focus on your application's logic while the framework handles routing, controller discovery, and more.
 
