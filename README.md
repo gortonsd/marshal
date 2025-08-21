@@ -5,7 +5,7 @@ Marshal is a lightweight PHP framework designed to make building web application
 
 ## Key Features
 
--- **Attribute-Based Routing**: Define your routes using PHP attributes. Simply add a `#[RouteAttribute(url: '/your-url')]` attribute to your controller class and Marshal will automatically register the route.
+- **Attribute-Based Routing**: Define your routes using PHP attributes. Simply add a `#[RouteAttribute(url: '/your-url')]` attribute to your controller class and Marshal will automatically register the route.
 - **Simple Controller Inheritance**: Extend `gortonsd\Marshal\Controller` to create your own controllers. Marshal takes care of all the heavy lifting, so you only need to implement your HTTP methods (`get()`, `post()`, etc.).
 - **Automatic Controller Discovery**: Marshal scans your controllers folder and registers routes automatically, keeping your codebase clean and organized.
 - **Ready for Expansion**: The framework is designed to be extended, with plans for request/response helpers, middleware, and more.
