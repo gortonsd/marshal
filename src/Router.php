@@ -62,7 +62,7 @@ class Router {
         }
         if (!$cacheValid || $this->controllersChanged($minCacheAge)) {
             $this->routes = [];
-            foreach (glob($this->controllerFolder . '/*.php') as $file) {
+            foreach ($this->getAllPhpFiles($this->controllerFolder) as $file) {
                 //require_once $file;
                 $contents = file_get_contents($file);
                 $namespace = '';
@@ -72,7 +72,7 @@ class Router {
 
                 $className = basename($file, '.php');
                 $fqcn = $namespace ? $namespace . '\\' . $className : $className;
-                //echo($fqcn."\r\n");
+                //echo($fqcn."<br>");
                 if (class_exists($fqcn)) {
                     $reflection = new \ReflectionClass($fqcn);
                     $attributes = $reflection->getAttributes('gortonsd\\Marshal\\RouteAttributes');
@@ -106,10 +106,28 @@ class Router {
         $cacheTime = filemtime($this->cacheFile);
         // Only check for changes if cache is older than minCacheAge
         if ((time() - $cacheTime) < $minCacheAge) return false;
-        foreach (glob($this->controllerFolder . '/*.php') as $file) {
+        foreach ($this->getAllPhpFiles($this->controllerFolder) as $file) {
             if (filemtime($file) > $cacheTime) return true;
         }
         return false;
+    }
+
+    /**
+     * Recursively get all PHP files in a folder and its subfolders
+     */
+    private function getAllPhpFiles($dir) {
+        $files = [];
+        $items = scandir($dir);
+        foreach ($items as $item) {
+            if ($item === '.' || $item === '..') continue;
+            $path = $dir . DIRECTORY_SEPARATOR . $item;
+            if (is_dir($path)) {
+                $files = array_merge($files, $this->getAllPhpFiles($path));
+            } elseif (is_file($path) && substr($path, -4) === '.php') {
+                $files[] = $path;
+            }
+        }
+        return $files;
     }
 
     /**
