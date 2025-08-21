@@ -74,14 +74,13 @@ class Router {
                 $fqcn = $namespace ? $namespace . '\\' . $className : $className;
                 //echo($fqcn."\r\n");
                 if (class_exists($fqcn)) {
-                    echo("class found");
                     $reflection = new \ReflectionClass($fqcn);
-                    $doc = $reflection->getDocComment();
-                    //echo($doc."\r\n");
-                    if ($doc && preg_match('/@url\s+(\S+)/', $doc, $matches)) {
-                        $url = $matches[1];
-                        //echo($url);
-                        foreach (["get", "post"] as $method) {
+                    $attributes = $reflection->getAttributes('gortonsd\\Marshal\\RouteAttributes');
+                    if (!empty($attributes)) {
+                        /** @var \gortonsd\Marshal\RouteAttributes $routeAttr */
+                        $routeAttr = $attributes[0]->newInstance();
+                        $url = $routeAttr->url;
+                        foreach (["get", "post", "put", "delete", "patch", "options"] as $method) {
                             if ($reflection->hasMethod($method)) {
                                 $this->routes[strtoupper($method)][$url] = $fqcn;
                             }
