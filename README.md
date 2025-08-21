@@ -20,6 +20,7 @@ use gortonsd\Marshal\RouteAttribute;
 use gortonsd\Marshal\Controller;
 
 #[RouteAttribute(url: '/example')]
+
 class ExampleController extends Controller {
 	public function get() {
 		echo "Hello from ExampleController!";
