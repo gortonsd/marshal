@@ -16,8 +16,8 @@ Marshal is a lightweight PHP framework designed to make building web application
 2. **Create a Controller**
 
 ```php
-use gortonsd\Marshal\RouteAttribute;
-use gortonsd\Marshal\Controller;
+use gortonsd\marshal\RouteAttribute;
+use gortonsd\marshal\Controller;
 
 #[RouteAttribute(url: '/example')]
 
@@ -34,7 +34,7 @@ class ExampleController extends Controller {
 3. **Run Marshal**
 
 ```php
-use gortonsd\Marshal\Router;
+use gortonsd\marshal\Router;
 
 $controllersPath = __DIR__ . '/Controllers'; // Path to your controllers
 $router = new Router($controllersPath);
