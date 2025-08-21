@@ -32,8 +32,7 @@ class ExampleController extends Controller {
 ```php
 use gortonsd\Marshal\Router;
 
-$controllersPath = __DIR__ . '/Controllers'; // Path to your controllers
-$router = new Router($controllersPath);
+$router = new Router(__DIR__ . '/Controllers'); // Path to your controllers
 $router->run();
 ```
 
