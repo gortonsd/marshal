@@ -1,5 +1,5 @@
 {
-    "name": "gortonsd/Marshal",
+    "name": "gortonsd/marshal",
     "description": "A lightweight PHP framework with automatic controller discovery, route registration via docblock annotations, and intelligent route caching",
     "type": "library",
     "keywords": [
