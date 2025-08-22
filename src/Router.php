@@ -39,13 +39,19 @@ class Router {
 
     /**
      * @param string $controllerFolder Path to controllers directory (required)
+     * @param bool $refresh If true, always refresh the route cache (default: false)
      */
-    public function __construct($controllerFolder) {
+    public function __construct($controllerFolder, $refresh = false) {
         if (empty($controllerFolder) || !is_dir($controllerFolder)) {
             throw new \InvalidArgumentException('Router requires a valid path to the controllers directory.');
         }
         $this->controllerFolder = $controllerFolder;
-        $this->loadControllers();
+        if ($refresh || !file_exists($this->cacheFile)) {
+            $this->loadControllers();
+        } else {
+            $json = file_get_contents($this->cacheFile);
+            $this->routes = json_decode($json, true) ?? [];
+        }
     }
 
     /**
