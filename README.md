@@ -45,6 +45,7 @@ $router->run();
 - Marshal caches discovered routes in a JSON file for fast startup.
 - By default, the cache is used if available. To force a refresh (e.g., after adding new controllers), pass `true` as the second argument to the `Router` constructor.
 - Example: `$router = new Router($controllersPath, true);`
+- Cache will be built if it does not already exist
 
 ## Philosophy
 
