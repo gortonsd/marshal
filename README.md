@@ -1,5 +1,4 @@
-
-# gortonsd/marshal
+# gortonsd/Marshal
 
 Marshal is a lightweight PHP framework designed to make building web applications simple and intuitive. With Marshal, you can focus on your application's logic while the framework handles routing, controller discovery, and more.
 
@@ -16,8 +15,8 @@ Marshal is a lightweight PHP framework designed to make building web application
 2. **Create a Controller**
 
 ```php
-use gortonsd\marshal\RouteAttribute;
-use gortonsd\marshal\Controller;
+use gortonsd\Marshal\RouteAttribute;
+use gortonsd\Marshal\Controller;
 
 #[RouteAttribute(url: '/example')]
 
@@ -34,12 +33,18 @@ class ExampleController extends Controller {
 3. **Run Marshal**
 
 ```php
-use gortonsd\marshal\Router;
+use gortonsd\Marshal\Router;
 
 $controllersPath = __DIR__ . '/Controllers'; // Path to your controllers
-$router = new Router($controllersPath);
+$router = new Router($controllersPath); // Uses cache if available
+// $router = new Router($controllersPath, true); // Force refresh and rebuild route cache
 $router->run();
 ```
+
+### Route Cache Behavior
+- Marshal caches discovered routes in a JSON file for fast startup.
+- By default, the cache is used if available. To force a refresh (e.g., after adding new controllers), pass `true` as the second argument to the `Router` constructor.
+- Example: `$router = new Router($controllersPath, true);`
 
 ## Philosophy
 
